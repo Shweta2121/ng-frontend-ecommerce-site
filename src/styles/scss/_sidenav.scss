@@ -1,0 +1,384 @@
+// Name:            Navbar
+// Description:     Component to create horizontal navigation bars
+//
+// Component:       `tu-sidenav`
+//
+// Sub-objects:     `tu-sidenav-container`
+//                  `tu-sidenav-left`
+//                  `tu-sidenav-right`
+//                  `tu-sidenav-center`
+//                  `tu-sidenav-center-left`
+//                  `tu-sidenav-center-right`
+//                  `tu-sidenav-nav`
+//                  `tu-sidenav-item`
+//                  `tu-sidenav-toggle`
+//                  `tu-sidenav-subtitle`
+//                  `tu-sidenav-dropbar`
+//
+// Adopted:         `tu-sidenav-dropdown` + Modifiers
+//                  `tu-sidenav-dropdown-nav`
+//                  `tu-sidenav-dropdown-grid`
+//                  `tu-sidenav-toggle-icon`
+//
+// Modifiers:       `tu-sidenav-primary`
+//                  `tu-sidenav-transparent`
+//                  `tu-sidenav-sticky`
+//                  `tu-sidenav-dropdown-stack`
+//
+// States:          `uk-active`
+//                  `uk-parent`
+//                  `uk-open`
+//
+//
+// ========================================================================
+// Variables
+// ========================================================================
+$tu-sidenav-background: $global-muted-background !default;
+$tu-sidenav-color-mode: none !default;
+$tu-sidenav-nav-item-height: 60px !default;
+$tu-sidenav-nav-item-padding-horizontal: 10px !default;
+$tu-sidenav-nav-item-color: #f5f5f5 !default;
+$tu-sidenav-nav-item-font-size: 18px !default;
+$tu-sidenav-nav-item-font-family: $global-font-family !default;
+$tu-sidenav-nav-item-hover-color: #fff !default;
+$tu-sidenav-nav-item-onclick-color: #f5f5f5 !default;
+$tu-sidenav-nav-item-active-color: #fff !default;
+$tu-sidenav-item-color: #fff !default;
+$tu-sidenav-toggle-color: $global-muted-color !default;
+$tu-sidenav-toggle-hover-color: $global-color !default;
+$tu-sidenav-subtitle-font-size: $global-small-font-size !default;
+$tu-sidenav-dropdown-z-index: $global-z-index+20 !default;
+$tu-sidenav-dropdown-width: 200px !default;
+$tu-sidenav-dropdown-margin: 0 !default;
+$tu-sidenav-dropdown-padding: 15px !default;
+$tu-sidenav-dropdown-background: $global-muted-background !default;
+$tu-sidenav-dropdown-color: $global-color !default;
+$tu-sidenav-dropdown-grid-gutter-horizontal: $global-gutter !default;
+$tu-sidenav-dropdown-grid-gutter-vertical: $tu-sidenav-dropdown-grid-gutter-horizontal !default;
+$tu-sidenav-dropdown-dropbar-margin-top: 0 !default;
+$tu-sidenav-dropdown-dropbar-margin-bottom: $tu-sidenav-dropdown-dropbar-margin-top !default;
+$tu-sidenav-dropdown-nav-item-color: $global-muted-color !default;
+$tu-sidenav-dropdown-nav-item-hover-color: $global-color !default;
+$tu-sidenav-dropdown-nav-item-active-color: $global-emphasis-color !default;
+$tu-sidenav-dropdown-nav-header-color: $global-emphasis-color !default;
+$tu-sidenav-dropdown-nav-divider-border-width: $global-border-width !default;
+$tu-sidenav-dropdown-nav-divider-border: $global-border !default;
+$tu-sidenav-dropdown-nav-sublist-item-color: $global-muted-color !default;
+$tu-sidenav-dropdown-nav-sublist-item-hover-color: $global-color !default;
+$tu-sidenav-dropdown-nav-sublist-item-active-color: $global-emphasis-color !default;
+$tu-sidenav-dropbar-background: $tu-sidenav-dropdown-background !default;
+$tu-sidenav-dropbar-z-index: $global-z-index - 20 !default;
+
+/* ========================================================================
+   Component: Sidenav
+ ========================================================================== */
+
+
+/* Groups
+========================================================================== */
+
+
+/*
+* 1. Align navs and items vertically if they have a different height
+* 2. Note: IE 11 requires an extra `div` which affects the center selector
+*/
+
+.tu-sidenav-top,
+.tu-sidenav-bottom,
+// 2. [class*='tu-sidenav-center'],
+.tu-sidenav-center,
+.tu-sidenav-center-top>*,
+.tu-sidenav-center-bottom>* {
+    display: flex;
+    flex-direction: column;
+    @include tu-screen-max-size-handler('-sm') {
+        // flex-direction: unset;
+    }
+    /* 1 */
+    align-items: center;
+}
+
+
+/*
+ * Horizontal alignment
+ * 1. Create position context for centered navbar with sub groups (left/right)
+ * 2. Fix text wrapping if content is larger than 50% of the container.
+ * 3. Needed for dropdowns because a new position context is created
+ *    `z-index` must be smaller than off-canvas
+ * 4. Align sub groups for centered navbar
+ */
+
+.tu-sidenav-top {
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    justify-content: stretch;
+    flex-direction: column;
+    position: relative;
+    @include tu-screen-max-size-handler('-sm') {
+        // flex-direction: row;
+    }
+}
+
+.tu-sidenav-bottom {
+    margin-top: auto;
+    @include tu-screen-max-size-handler('-sm') {
+        // margin-top: unset;
+        // margin-left: auto;
+    }
+}
+
+.tu-sidenav-center:only-child {
+    margin-top: auto;
+    margin-bottom: auto;
+    /* 1 */
+    position: relative;
+    @include tu-screen-max-size-handler('-sm') {
+        // margin-top: unset;
+        // margin-bottom: unset;
+        // margin-left: auto;
+        // margin-right: auto;
+    }
+}
+
+.tu-sidenav-center:not(:only-child) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 2 */
+    width: max-content;
+    box-sizing: border-box;
+    /* 3 */
+    z-index: $global-z-index - 10;
+}
+
+
+/* 4 */
+
+.tu-sidenav-center-top,
+.tu-sidenav-center-bottom {
+    position: absolute;
+    top: 0;
+}
+
+.tu-sidenav-center-top {
+    top: 100%;
+    @include tu-screen-max-size-handler('-sm') {
+        // top: unset;
+        // left: 100%;
+    }
+}
+
+.tu-sidenav-center-bottom {
+    bottom: 100%;
+    @include tu-screen-max-size-handler('-sm') {
+        // bottom: unset;
+        // right: 100%;
+    }
+}
+
+[class*='tu-sidenav-center-'] {
+    width: max-content;
+    box-sizing: border-box;
+}
+
+
+/* Nav
+ ========================================================================== */
+
+
+/*
+ * 1. Reset list
+ */
+
+.tu-sidenav-nav {
+    display: flex;
+    flex-direction: column;
+    /* 1 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    // width: 100%;
+    width: $tu-sidenav-nav-item-height;
+    @include tu-screen-max-size-handler('-sm') {
+        // width: 100%;
+        // flex-direction: row;
+        // width: unset;
+    }
+}
+
+
+/*
+ * Allow items to wrap into the next line
+ * Only not `absolute` positioned groups
+ */
+
+.tu-sidenav-top,
+.tu-sidenav-bottom,
+.tu-sidenav-center:only-child {
+    flex-wrap: wrap;
+}
+
+
+/*
+ * Items
+ * 1. Center content vertically and horizontally
+ * 2. Dimensions
+ * 3. Style
+ * 4. Required for `a`
+ */
+
+// .tu-sidenav-scrollable {
+// }
+.tu-sidenav-scrollable {
+    padding: 35px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: stretch;
+    flex-direction: column;
+    position: relative;
+    @include tu-screen-max-size-handler('-sm') {
+        // flex-direction: row;
+        // padding: 30px;
+    }
+    .tu-sidenav-scroll-view {
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // padding: 15px 13px;
+        overflow: auto;
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            border-bottom: 1px solid #ffffff30;
+            background: rgba(map-get($color-primary, 500), 0);
+            background: -webkit-gradient(to bottom, rgba(map-get($color-primary, 500), 0) 0, rgba(map-get($color-primary, 500), .51) 35%, map-get($color-primary, 500) 75%, map-get($color-primary, 500) 100%);
+            background: linear-gradient(to bottom, rgba(map-get($color-primary, 500), 0) 0, rgba(map-get($color-primary, 500), .51) 35%, map-get($color-primary, 500) 75%, map-get($color-primary, 500) 100%);
+            @include tu-screen-max-size-handler('-sm') {
+                // bottom: unset;
+                // right: 0;
+                // height: 100%;
+                // width: 20px;
+                // background: -webkit-gradient(to right, rgba(map-get($color-primary, 500), 0) 0, rgba(map-get($color-primary, 500), .51) 35%, map-get($color-primary, 500) 75%, map-get($color-primary, 500) 100%);
+                // background: linear-gradient(to right, rgba(map-get($color-primary, 500), 0) 0, rgba(map-get($color-primary, 500), .51) 35%, map-get($color-primary, 500) 75%, map-get($color-primary, 500) 100%);
+            }
+        }
+    }
+}
+
+.tu-sidenav-nav>li,
+.tu-sidenav-nav>li>a,
+// Nav item
+.tu-sidenav-item,
+// Content item
+.tu-sidenav-toggle {
+    // Clickable item
+    /* 1 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* 2 */
+    box-sizing: border-box;
+    width: 100%;
+    min-height: $tu-sidenav-nav-item-height;
+    padding: 0 $tu-sidenav-nav-item-padding-horizontal;
+    /* 3 */
+    font-size: $tu-sidenav-nav-item-font-size;
+    font-family: $tu-sidenav-nav-item-font-family;
+    /* 4 */
+    text-decoration: none;
+    @include tu-screen-max-size-handler('-sm') {
+        // flex-direction: row;
+        // padding: 0;
+        // margin: 5px !important;
+        // width: unset;
+    }
+}
+
+
+/*
+ * Nav items
+ */
+
+.tu-sidenav-nav>li {
+    color: $tu-sidenav-nav-item-color;
+    height: 50px;
+    width: 50px;
+    margin: 5px auto;
+    min-height: 50px;
+    border: 2.5px solid transparent;
+    border-radius: 16px;
+    transition: 0.5s all;
+    &>a {
+        @if(mixin-exists(hook-tu-sidenav-nav-item)) {
+            @include hook-tu-sidenav-nav-item();
+        }
+        color: $tu-sidenav-nav-item-color;
+        min-height: unset;
+        height: 40px;
+        width: 40px;
+        overflow: hidden;
+        border-radius: 10px;
+        padding: 0px;
+        transition: 0.5s all;
+        border: 1px solid rgba($global-border, 0.1);
+        // background-color: map-get($map: $color-primary, $key: 500);
+        &:hover {
+            background-color: map-get($map: $color-primary, $key: 400);
+        }
+    }
+    &:hover {
+        border-color: rgba($color: #FFFFFF, $alpha: 0.4);
+    }
+    &.uk-active {
+        border-color: white;
+    }
+}
+
+
+/*
+ * Hover
+ * Apply hover style also to focus state and if dropdown is opened
+ */
+
+.tu-sidenav-nav>li:hover>a,
+.tu-sidenav-nav>li>a:focus,
+.tu-sidenav-nav>li>a.uk-open {
+    color: $tu-sidenav-nav-item-hover-color;
+    outline: none;
+    @if(mixin-exists(hook-tu-sidenav-nav-item-hover)) {
+        @include hook-tu-sidenav-nav-item-hover();
+    }
+}
+
+
+/* OnClick */
+
+.tu-sidenav-nav>li>a:active {
+    color: $tu-sidenav-nav-item-onclick-color;
+    background-color: map-get($map: $color-primary, $key: 200);
+    border: 1px solid rgba($global-border, 0.3);
+    @if(mixin-exists(hook-tu-sidenav-nav-item-onclick)) {
+        @include hook-tu-sidenav-nav-item-onclick();
+    }
+}
+
+
+/* Active */
+
+.tu-sidenav-nav>li.uk-active>a {
+    color: $tu-sidenav-nav-item-active-color;
+    background-color: map-get($map: $color-primary, $key: 300);
+    border: 1px solid rgba($global-border, 0.3);
+    @if(mixin-exists(hook-tu-sidenav-nav-item-active)) {
+        @include hook-tu-sidenav-nav-item-active();
+    }
+}

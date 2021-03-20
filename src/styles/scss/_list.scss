@@ -1,0 +1,12 @@
+.tu-list-inline {
+    list-style: none;
+    margin: 0px !important;
+    &>li {
+        margin: 0px !important;
+        list-style: none;
+        display: inline-block;
+        &+li {
+            padding-left: 15px;
+        }
+    }
+}

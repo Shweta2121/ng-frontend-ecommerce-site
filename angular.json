@@ -31,10 +31,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles/styles.scss"
             ],
-            "scripts": []
-          },
+            "scripts": [
+              "./node_modules/uikit/dist/js/uikit.min.js",
+              "./node_modules/uikit/dist/js/uikit-icons.min.js",
+              "./node_modules/apexcharts/dist/apexcharts.min.js"
+          ]
+                  },
           "configurations": {
             "production": {
               "fileReplacements": [
@@ -94,6 +99,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -127,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "ng-test-site-frontend"
+  "defaultProject": "ng-test-site-frontend",
+  "cli": {
+    "analytics": "7b90b84f-f39d-4579-baf3-92598cccceec"
+  }
 }

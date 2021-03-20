@@ -1,0 +1,138 @@
+<div class="tu-header tu-b-b-1">
+  <section class="uk-visible@ms">
+    <div class="tu-header" uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+      <nav class="uk-navbar-container uk-container tu-b-0 tu-p-h-sm-10" style="z-index: 2;" uk-navbar>
+        <div class="uk-navbar-left">
+          <a class="uk-navbar-toggle uk-hidden@l uk-hidden@m uk-hidden@xl" (click)="toggleSideNav()"
+            uk-navbar-toggle-icon></a>
+          <a class="uk-navbar-item uk-logo uk-visible@m" routerLink="/">
+            <img class="tu-mxw-150" src="assets/image/prompaylogo.gif" />
+          </a>
+        </div>
+        <div class="uk-navbar-center">
+          <div class="uk-hidden@l uk-hidden@m uk-hidden@xl">
+            <a class="uk-navbar-item uk-logo" routerLink="/">
+              <img class="tu-mxw-100" src="assets/image/prompaylogo.gif" />
+            </a>
+          </div>
+          <div class="uk-visible@m">
+            <ul class="uk-navbar-nav tu-font-family">
+              <li class="tu-p-r-15" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/about">About</a></li>
+              <li class="tu-p-r-15" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/bags">Bags</a></li>
+              <li class="tu-p-r-15" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                <a href="#">Apparel</a>
+                <div class="uk-navbar-dropdown tu-m-t-0 tu-p-v-18">
+                  <ul class="uk-nav uk-navbar-dropdown-nav tu-font-size-16">
+                    <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}">
+                      <a routerLink="/apparel/tshirt">T-Shirts</a>
+                    </li>
+                    <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                      <a routerLink="/apparel/sports-shirts">Sport Shirts</a>
+                    </li>
+                    <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                      <a routerLink="/apparel/outwear">Outerwear</a>
+                    </li>
+                    <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                      <a routerLink="/apparel/wooven-shirts">Woven Shirts</a>
+                    </li>
+                    <li routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                      <a routerLink="/apparel/fleece">Fleece</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="tu-p-r-15 bugde" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                <a href="#">Promotional</a>
+                <div class="uk-navbar-dropdown tu-p-v-18 tu-m-t-0">
+                  <ul class="uk-nav uk-navbar-dropdown-nav tu-font-size-16">
+                    <li class="tu-p-v-6" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a
+                        class="tu-p-v-0" routerLink="promotional/technology">Technology</a></li>
+                    <li class="tu-p-v-6" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: true}"><a
+                        class="tu-p-v-0" routerLink="promotional/drinkware">Drinkware</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="tu-p-r-15" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="uk-navbar-right">
+          <ul class="uk-navbar-nav">
+            <li>
+              <a>
+                <button type="submit" color="primary" mat-flat-button>Sign in</button>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidenav uk-hidden@l uk-hidden@m uk-hidden@xl tu-b-v-1" *ngIf="openSideNav">
+        <div class="tu-p-t-0">
+          <div class="uk-width-1-1">
+            <ul class="uk-nav-primary uk-nav-parent-icon tu-p-h-sm-20" uk-nav>
+              <li (click)="toggleSideNav()" class="tu-p-v-6" routerLinkActive="uk-active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a class="tu-font-size-16" routerLink="/">Home</a></li>
+              <li class="uk-nav-divider"></li>
+              <li (click)="toggleSideNav()" class="tu-p-v-6" routerLinkActive="uk-active"
+                [routerLinkActiveOptions]="{exact: false}">
+                <a class="tu-font-size-16" routerLink="/bags">Bags</a></li>
+              <li class="uk-nav-divider"></li>
+              <li class="uk-parent tu-p-v-6" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                <a class="tu-font-size-16">Apparel</a>
+                <ul class="uk-nav-sub">
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <a class="tu-font-size-16" routerLink="/explore/virtual-card">Virtual Business Card</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="/explore/book">Address Card</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="/explore/scanner">Business Card Scanner</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="explore/analytics">Analytics</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="explore/email-signature">Digital Email Signature</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="explore/meeting">Virtual Meeting Background</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="explore/integration">Third Party Integration</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="explore/api">Restful API</a></li>
+                </ul>
+              </li>
+              <li class="uk-nav-divider"></li>
+              <li class="uk-parent tu-p-v-6" routerLinkActive="uk-active" [routerLinkActiveOptions]="{exact: false}">
+                <a class="tu-font-size-16">Solutions</a>
+                <ul class="uk-nav-sub">
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: true}"><a class="tu-font-size-16"
+                      routerLink="solutions/individual">Individual</a></li>
+                  <li (click)="toggleSideNav()" class="tu-p-v-8" routerLinkActive="uk-active"
+                    [routerLinkActiveOptions]="{exact: false}">
+                    <a class="tu-font-size-16" routerLink="solutions/team">Team</a></li>
+                </ul>
+              </li>
+              <li class="uk-nav-divider"></li>
+              <li (click)="toggleSideNav()" class="tu-p-v-6" routerLinkActive="uk-active"
+                [routerLinkActiveOptions]="{exact: false}">
+                <a class="tu-font-size-16" routerLink="/pricing">Pricing</a></li>
+              <li class="uk-nav-divider"></li>
+              <li (click)="toggleSideNav()" class="tu-p-v-6" routerLinkActive="uk-active"
+                [routerLinkActiveOptions]="{exact: false}">
+                <a class="tu-font-size-16" routerLink="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

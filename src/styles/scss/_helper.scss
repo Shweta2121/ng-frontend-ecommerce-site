@@ -1,0 +1,274 @@
+// @import "variables.scss";
+$tu-keyword: 'tu' !default;
+$tu-class-slug-padding-list: 'p''p-t''p-b''p-l''p-r''p-v''p-h';
+$tu-class-slug-margin-list: 'm''m-t''m-b''m-l''m-r''m-v''m-h';
+$tu-class-slug-anchors-list: '''-t''-b''-l''-r''-v''-h';
+$tu-class-slug-screen-size-list: '''-xs''-sm''-md''-lg';
+$tu-class-slug-gutters-list: 'padding''margin';
+$tu-palate-shades: 0 50 100 200 300 400 500 600 700;
+$tu-font-weight: 100 200 300 400 500 600 700 800 900;
+$tu-breakpoint-sm: 640px !default;
+$tu-breakpoint-md: 960px !default;
+$tu-breakpoint-lg: 1200px !default;
+$tu-breakpoint-xl: 1600px !default;
+$tu-breakpoint-max-xs: ($tu-breakpoint-sm - 1) !default;
+$tu-breakpoint-max-sm: ($tu-breakpoint-md - 1) !default;
+$tu-breakpoint-max-md: ($tu-breakpoint-lg - 1) !default;
+$tu-breakpoint-max-lg: ($tu-breakpoint-xl - 1) !default;
+@mixin tu-screen-size-handler($screen) {
+    @if ($screen=='') {
+        @media (min-width: $tu-breakpoint-max-lg + 1) {
+            @content;
+        }
+    }
+    @else if ($screen=='-lg') {
+        @media (max-width: $tu-breakpoint-max-lg) and (min-width: $tu-breakpoint-max-md + 1) {
+            @content;
+        }
+    }
+    @else if ($screen=='-md') {
+        @media (max-width: $tu-breakpoint-max-md) and (min-width: $tu-breakpoint-max-sm + 1) {
+            @content;
+        }
+    }
+    @else if ($screen=='-sm') {
+        @media (max-width: $tu-breakpoint-max-sm) and (min-width: $tu-breakpoint-max-xs + 1) {
+            @content;
+        }
+    }
+    @else if ($screen=='-xs') {
+        @media (max-width: $tu-breakpoint-max-xs) {
+            @content;
+        }
+    }
+}
+
+@mixin tu-screen-max-size-handler($screen) {
+    @if ($screen=='') {
+        @content;
+    }
+    @else if ($screen=='-lg') {
+        @media (max-width: $tu-breakpoint-max-lg) {
+            @content;
+        }
+    }
+    @else if ($screen=='-md') {
+        @media (max-width: $tu-breakpoint-max-md) {
+            @content;
+        }
+    }
+    @else if ($screen=='-sm') {
+        @media (max-width: $tu-breakpoint-max-sm) {
+            @content;
+        }
+    }
+    @else if ($screen=='-xs') {
+        @media (max-width: $tu-breakpoint-max-xs) {
+            @content;
+        }
+    }
+}
+
+@mixin tu-anchor-handler($anchor-of, $anchor, $param) {
+    @if ($anchor=='') {
+        #{$anchor-of}: $param !important;
+    }
+    @else if ($anchor=='-t') {
+        #{$anchor-of}-top: $param !important;
+    }
+    @else if ($anchor=='-b') {
+        #{$anchor-of}-bottom: $param !important;
+    }
+    @else if ($anchor=='-l') {
+        #{$anchor-of}-left: $param !important;
+    }
+    @else if ($anchor=='-r') {
+        #{$anchor-of}-right: $param !important;
+    }
+    @else if ($anchor=='-v') {
+        #{$anchor-of}-top: $param !important;
+        #{$anchor-of}-bottom: $param !important;
+    }
+    @else if ($anchor=='-h') {
+        #{$anchor-of}-left: $param !important;
+        #{$anchor-of}-right: $param !important;
+    }
+}
+
+@mixin tu-gutter-anchor-handler($anchor-of, $anchor, $i) {
+    @include tu-anchor-handler($anchor-of, $anchor, 0px + $i);
+}
+
+@mixin tu-gutter-screen-size-handler($screen, $gutter, $anchor, $i) {
+    $anchor-of: '';
+    @if ($gutter=='margin') {
+        $anchor-of: 'm';
+    }
+    @else if ($gutter=='padding') {
+        $anchor-of: 'p';
+    }
+    @if ($screen=='') {
+        .#{$tu-keyword}-#{$anchor-of}#{$anchor}-#{$i} {
+            @include tu-gutter-anchor-handler($gutter, $anchor, $i);
+        }
+    }
+    @else if ($screen=='-lg') {
+        @media (max-width: $tu-breakpoint-max-lg) {
+            .#{$tu-keyword}-#{$anchor-of}#{$anchor}#{$screen}-#{$i} {
+                @include tu-gutter-anchor-handler($gutter, $anchor, $i);
+            }
+        }
+    }
+    @else if ($screen=='-md') {
+        @media (max-width: $tu-breakpoint-max-md) {
+            .#{$tu-keyword}-#{$anchor-of}#{$anchor}#{$screen}-#{$i} {
+                @include tu-gutter-anchor-handler($gutter, $anchor, $i);
+            }
+        }
+    }
+    @else if ($screen=='-sm') {
+        @media (max-width: $tu-breakpoint-max-sm) {
+            .#{$tu-keyword}-#{$anchor-of}#{$anchor}#{$screen}-#{$i} {
+                @include tu-gutter-anchor-handler($gutter, $anchor, $i);
+            }
+        }
+    }
+    @else if ($screen=='-xs') {
+        @media (max-width: $tu-breakpoint-max-xs) {
+            .#{$tu-keyword}-#{$anchor-of}#{$anchor}#{$screen}-#{$i} {
+                @include tu-gutter-anchor-handler($gutter, $anchor, $i);
+            }
+        }
+    }
+}
+
+@each $screen in $tu-class-slug-screen-size-list {
+    /**
+   * General Gutter Param iteration
+   */
+    @each $anchor in $tu-class-slug-anchors-list {
+        @for $i from 0 through 200 {
+            @each $gutter in $tu-class-slug-gutters-list {
+                @include tu-gutter-screen-size-handler($screen, $gutter, $anchor, $i);
+            }
+        }
+    }
+    /**
+   * General Radius Param iteration
+   */
+    @for $i from 0 through 50 {
+        @include tu-screen-max-size-handler($screen) {
+            .#{$tu-keyword}-br#{$screen}-#{$i} {
+                border-radius: 0px + $i !important;
+            }
+        }
+    }
+    /**
+   * General Border Param iteration
+   */
+    @each $anchor in $tu-class-slug-anchors-list {
+        @for $i from 0 through 4 {
+            @include tu-screen-max-size-handler($screen) {
+                .#{$tu-keyword}-b#{$anchor}#{$screen}-#{$i} {
+                    @include tu-anchor-handler('border', $anchor, 0px + $i solid $border-color-default);
+                }
+            }
+        }
+    }
+    /**
+   * General font size iteration
+   */
+    @for $i from 6 through 160 {
+        @include tu-screen-max-size-handler($screen) {
+            .#{$tu-keyword}-font-size#{$screen}-#{$i} {
+                font-size: 0px + $i !important;
+            }
+        }
+    }
+}
+
+
+/**
+* Color Primary Palate Shade Param iteration
+*/
+
+.#{$tu-keyword}-bg-primary {
+    background-color: map-get($map: $color-primary, $key: 300);
+}
+
+.#{$tu-keyword}-bg-secondary {
+    background-color: map-get($map: $color-secondary, $key: 300);
+}
+
+.#{$tu-keyword}-text-primary {
+    color: map-get($map: $color-primary, $key: 300);
+}
+
+.#{$tu-keyword}-text-secondary {
+    color: map-get($map: $color-secondary, $key: 300);
+}
+
+@each $shade in $tu-palate-shades {
+    .#{$tu-keyword}-bg-primary-#{$shade} {
+        background-color: map-get($map: $color-primary, $key: $shade) !important;
+    }
+    .#{$tu-keyword}-bg-secondary-#{$shade} {
+        background-color: map-get($map: $color-secondary, $key: $shade) !important;
+    }
+    .#{$tu-keyword}-text-primary-#{$shade} {
+        color: map-get($map: $color-primary, $key: $shade) !important;
+    }
+    .#{$tu-keyword}-text-secondary-#{$shade} {
+        color: map-get($map: $color-secondary, $key: $shade) !important;
+    }
+}
+
+@each $weight in $tu-font-weight {
+    .#{$tu-keyword}-fw-#{$weight} {
+        font-weight: $weight !important;
+    }
+}
+
+
+/**
+   * General max-height Param iteration
+   */
+
+@for $i from 10 through 100 {
+    .#{$tu-keyword}-mxh-#{$i} {
+        max-height: 0px + $i !important;
+    }
+}
+
+@for $i from 10 through 1000 {
+    $a: $i * 2;
+    .#{$tu-keyword}-mxw-#{$a} {
+        max-width: 0px + $a !important;
+    }
+    $a: $i * 2;
+    .#{$tu-keyword}-mnw-#{$a} {
+        min-width: 0px + $a !important;
+    }
+}
+
+
+/**
+   * General min-height Param iteration
+   */
+
+@for $i from 10 through 1000 {
+    $a: $i * 2;
+    .#{$tu-keyword}-mxh-#{$a} {
+        max-height: 0px + $a !important;
+    }
+    $a: $i * 2;
+    .#{$tu-keyword}-mnh-#{$a} {
+        min-height: 0px + $a !important;
+    }
+}
+
+// @for $i from 10 through 100 {
+//     .#{$tu-keyword}-mnh-#{$i} {
+//         min-height: 0px + $i !important;
+//     }
+// }

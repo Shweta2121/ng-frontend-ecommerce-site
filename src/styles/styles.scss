@@ -1,0 +1,451 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+$fa-font-path: "~font-awesome/fonts";
+// @import "~bootstrap/dist/css/bootstrap.min.css";
+// @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+@import '~font-awesome/scss/font-awesome';
+@import "~@icon/themify-icons/themify-icons.css";
+
+
+/* You can add global styles to this file, and also import other style files */
+@import "./scss/_variables";
+@import "./scss/_list";
+@import "./scss/_helper";
+
+/* ========================================================================
+   1. Your custom variables and variable overwrites.
+ ========================================================================== */
+
+
+$global-color:#202121 !default;
+$global-large-headline-color:#1650EB !default;
+
+
+/* ========================================================================
+   2. Import default variables and available mixins.
+ ========================================================================== */
+
+@import "~uikit/src/scss/variables-theme.scss";
+@import "~uikit/src/scss/mixins-theme.scss";
+
+/* ========================================================================
+   3. Your custom mixin overwrites.
+ ========================================================================== */
+
+@import "./scss/_reset-theme";
+
+/* ========================================================================
+4. Import UIkit.
+========================================================================== */
+
+@import "~uikit/src/scss/uikit-theme.scss";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* ========================================================================
+   Test Component:  Main 
+ ========================================================================== */
+
+.tu-master {
+  .mat-form-field+.mat-form-field {
+    margin-left: 8px;
+  }
+
+  .example-margin {
+    margin: 6px 0px;
+  }
+
+  @-webkit-keyframes headline-lineAnimation {
+    0% {
+      left: -12px
+    }
+
+    100% {
+      left: 100%
+    }
+  }
+
+  @keyframes headline-lineAnimation {
+    0% {
+      left: -12px
+    }
+
+    100% {
+      left: 100%
+    }
+  }
+
+  .tu-headline-animate-line {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    background-color: #272c34;
+    width: 100%;
+    height: 6px;
+    width: 80px;
+
+    @include tu-screen-max-size-handler('-xs') {
+      width: 50px;
+    }
+  }
+
+  .tu-headline-animate-line:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    -webkit-animation: 1.5s ease-in-out infinite headline-lineAnimation;
+    animation: 1.5s ease-in-out infinite headline-lineAnimation;
+  }
+
+
+
+  .tu-headline-large {
+    color: $global-large-headline-color;
+    font-size: 38px;
+
+    @include tu-screen-max-size-handler('-md') {
+      font-size: 32px;
+    }
+
+    @include tu-screen-max-size-handler('-xs') {
+      font-size: 26px;
+    }
+  }
+
+  .tu-headline-medium {
+    color: $global-color;
+    font-size: 26px;
+
+    @include tu-screen-max-size-handler('-md') {
+      font-size: 24px;
+    }
+
+    @include tu-screen-max-size-handler('-xs') {
+      font-size: 20px;
+    }
+  }
+
+  .tu-team {
+    background: #F5F7FC;
+
+    .tu-social-icon {
+      border: 1px solid #707070;
+      color: #2E2E2E;
+      transition: all .3s ease;
+    }
+
+    .tu-social-icon:hover {
+      background: #1652F0 !important;
+      color: #fff !important;
+      border: 1px solid #1652F0;
+    }
+
+    .uk-overlay-default,
+    .uk-icon-button {
+      background: #ffffff !important;
+    }
+  }
+
+  .tu-headline-small {
+    color: $global-color;
+    font-size: 16px;
+    font-weight: 600;
+
+    @include tu-screen-max-size-handler('-xs') {
+      font-size: 14px;
+    }
+  }
+
+  .tu-bolder {
+    font-weight: 800 !important;
+  }
+
+  .tu-headline-blue {
+    color: #00CDD8;
+    font-size: 22px;
+    font-weight: 700;
+
+    @include tu-screen-max-size-handler('-xs') {
+      font-size: 18px;
+    }
+  }
+
+  .tu-paragraph-small {
+    color: #817E7E;
+    font-size: 14px;
+    word-spacing: 4px;
+  }
+
+  .tu-paragraph {
+    color: #817E7E;
+    font-size: 16px;
+    line-height: 28px;
+    word-spacing: 4px;
+
+    @include tu-screen-max-size-handler('-xs') {
+      font-size: 14px;
+      line-height: 26px;
+      word-spacing: 2px;
+    }
+  }
+
+  .tu-button {
+    padding: 4px 25px;
+    color: #ffffff;
+    background: #00CFDA;
+    border: 1px solid #00CFDA;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+    text-decoration: none;
+  }
+
+  .tu-headline-line {
+    h2::after {
+      background-color: $global-large-headline-color;
+      content: "";
+      display: inline-block;
+      height: 4px;
+      vertical-align: middle;
+      width: 8%;
+    }
+  }
+
+  .tu-headline-darkblue-line {
+    h2::after {
+      background-color: $global-large-headline-color;
+      content: "";
+      display: inline-block;
+      height: 6px;
+      vertical-align: middle;
+      width: 8%;
+
+      @include tu-screen-max-size-handler('-xs') {
+        width: 18%;
+        height: 4px;
+      }
+    }
+  }
+
+  .tu-headline-lightblue-line {
+    h3::before {
+      background-color: #00CDD8;
+      content: "";
+      display: inline-block;
+      height: 2px;
+      vertical-align: middle;
+      width: 8%;
+    }
+  }
+
+  .tu-para {
+    color: $global-color;
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .tu-headline-solution-darkblue-line {
+    @include tu-screen-max-size-handler('-sm') {
+      h4::after {
+        background-color: $global-large-headline-color;
+        content: "";
+        display: inline-block;
+        height: 6px;
+        vertical-align: middle;
+        width: 8%;
+        width: 10%;
+        height: 4px;
+      }
+    }
+
+    @include tu-screen-max-size-handler('-xs') {
+      h4::after {
+        width: 18%;
+      }
+    }
+  }
+
+
+  .tu-common-bg {
+    .tu-bg-left-blue {
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 50%;
+        height: 80%;
+        position: absolute;
+        left: 0;
+        background-color: #F1F5FF;
+        border-radius: 0% 6% 6% 0%;
+
+        @include tu-screen-max-size-handler('-xs') {
+          border-radius: 0px 20px 20px 0px;
+          height: 90%;
+        }
+      }
+    }
+
+    .uk-text-left,
+    .uk-text-right,
+    .uk-text-center {
+      z-index: 1
+    }
+
+    .tu-bg-right-blue {
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 65%;
+        height: 80%;
+        position: absolute;
+        right: 0;
+        background-color: #F1F5FF;
+        border-radius: 6% 0px 0px 6%;
+
+        @include tu-screen-max-size-handler('-xs') {
+          border-radius: 20px 0px 0px 20px;
+          height: 90%;
+        }
+      }
+    }
+  }
+}
+
+/* ========================================================================
+   Test Component:  Header
+ ========================================================================== */
+
+.tu-header {
+  .uk-navbar-container:not(.uk-navbar-transparent) {
+    background: #ffffff !important;
+  }
+
+  li.uk-active>a {
+    font-weight: 800 !important;
+    color: #1654f0 !important;
+  }
+
+  ul.uk-navbar-nav {
+    &>li {
+      &.uk-active>a {
+        border-top: 4px solid #1654f0;
+        font-weight: 600;
+        color: #1654f0;
+      }
+    }
+  }
+
+  .uk-sticky-fixed {
+    background: white;
+    border-bottom: 0px solid rgba(181, 181, 181, 0.2);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  }
+}
+
+
+.tu-contact {
+  .tu-bg-blue {
+    background: #DCDCDC !important;
+  }
+
+  h3 {
+    color: #00CDD8 !important;
+  }
+
+  h3:before {
+    content: "";
+    display: inline-block;
+    height: 3px;
+    background: #00CDD8;
+    vertical-align: middle;
+    width: 12%;
+  }
+}
+
+
+.tu-footer {
+  a {
+    color: #817E7E;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+
+.features {
+  .uk-card-default {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  button {
+    color: #FFFFFF;
+    background: #00CFDA;
+  }
+
+  h2 {
+    color: #202121;
+  }
+
+  p {
+    color: #817E7E;
+  }
+
+  i {
+    color: #ffffff;
+    font-size: 25px;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    text-align: center;
+    width: 50px;
+    border-radius: 50%;
+    z-index: 1;
+    transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -ms-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+    margin-bottom: 15px;
+  }
+
+  .dark-blue {
+    background: #1654f0;
+  }
+
+  .light-blue {
+    background: #6BCAE2;
+  }
+}
+
+
+
+.tu-service {
+  .uk-card-small {
+    border-style: dashed !important;
+    border: 4px solid #1652F0;
+  }
+
+  .uk-card-small:hover {
+    border-style: none !important;
+  }
+
+  .uk-card-title {
+    font-size: 22px;
+  }
+}

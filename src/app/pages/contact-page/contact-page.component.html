@@ -1,0 +1,80 @@
+<div class="tu-contact">
+  <section class="tu-p-b-30 tu-p-t-30 tu-m-t-30 tu-p-t-sm-0">
+    <div class="uk-container">
+      <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
+        <div>
+          <div class="uk-card-hover uk-card-body uk-text-center">
+            <div>
+              <button type="button" class="uk-text-center uk-text-white " mat-icon-button>
+                <mat-icon style="font-size: 18px; color: #1654f0;" fontSet="fa" fontIcon="fa-phone"></mat-icon>
+              </button>
+            </div>
+            <h4 class="uk-margin-remove">+91 - 1234567890</h4>
+          </div>
+        </div>
+        <div>
+          <div class="uk-card-hover uk-card-body uk-text-center">
+            <div>
+              <button type="button" class="uk-text-center uk-text-white " mat-icon-button>
+                <mat-icon style="font-size: 18px; color: #1654f0;" fontSet="fa" fontIcon="fa-envelope"></mat-icon>
+              </button>
+            </div>
+            <h4 class="uk-margin-remove">name@gmail.com</h4>
+          </div>
+        </div>
+        <div>
+          <div class="uk-card-hover uk-card-body uk-text-center">
+            <div>
+              <button type="button" class="uk-text-center uk-text-white " mat-icon-button>
+                <mat-icon style="font-size: 18px; color: #1654f0;" fontSet="fa" fontIcon="fa-map-marker"></mat-icon>
+              </button>
+            </div>
+            <h4 class="uk-margin-remove">101 lorem ipsum</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="tu-p-b-30 tu-p-t-30 tu-m-t-30">
+    <div class="uk-container">
+      <div class="uk-grid uk-grid-smalls uk-child-width-1-2@m uk-grid-matchs uk-margin">
+        <div class="tu-p-60 tu-bg-blue">
+          <div class="">
+            <h3 class="uk-margin-remove tu-font-size-18">&nbsp;Contact Us</h3>
+            <h2 class="tu-bold uk-margin-remove tu-font-size-24">Let's get in touch with us</h2>
+            <form class="tu-p-t-30" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+              <div class="uk-margin">
+                <mat-form-field class="uk-width-1-1">
+                  <mat-label>Your Name</mat-label>
+                  <input matInput type="text" id="form-name" formCon trolName="name">
+                </mat-form-field>
+              </div>
+              <div class="uk-margin">
+                <mat-form-field class="uk-width-1-1">
+                  <mat-label>Email Address</mat-label>
+                  <input matInput type="text" id="form-email" formControlName="email">
+                </mat-form-field>
+              </div>
+              <div class="uk-margin">
+                <mat-form-field class="uk-width-1-1">
+                  <mat-label>Your Message</mat-label>
+                  <input matInput type="text" id="form-message" formControlName="message">
+                </mat-form-field>
+              </div>
+              <div class="uk-margin">
+                <button type="button" mat-raised-button color="primary">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="">
+          <div class="">
+            <img src="assets/image/map.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

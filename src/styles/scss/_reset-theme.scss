@@ -1,0 +1,232 @@
+/* ========================================================================
+   Component: Navbar
+ ========================================================================== */
+
+@mixin hook-navbar-item() {
+    transition: 0.5s all;
+    font-size: 14px;
+    @include tu-screen-max-size-handler('-sm') {
+        font-size: 12px;
+        min-height: $navbar-nav-item-height - 20px;
+    }
+}
+
+@mixin hook-navbar-toggle() {
+    transition: 0.5s all;
+    @include tu-screen-max-size-handler('-sm') {
+        min-height: $navbar-nav-item-height - 20px;
+    }
+}
+
+@mixin hook-navbar-nav-item() {
+    transition: 0.5s all;
+    font-size: 16px;
+    font-weight: 400;
+    @include tu-screen-max-size-handler('-sm') {
+        min-height: $navbar-nav-item-height - 20px;
+    }
+}
+
+@mixin hook-navbar() {
+    transition: 0.5s all;
+    border-bottom: 1px solid rgba($color: $global-border, $alpha: 0.2);
+    .uk-navbar-nav>li>a,
+    .uk-navbar-item,
+    .uk-navbar-toggle {
+        min-height: $navbar-nav-item-height;
+    }
+}
+
+@mixin hook-navbar-sticky() {
+    .uk-navbar-nav>li>a,
+    .uk-navbar-item,
+    .uk-navbar-toggle {
+        min-height: $navbar-nav-item-height - 20px;
+    }
+}
+
+
+/* ========================================================================
+   Component: Card
+ ========================================================================== */
+
+@mixin hook-card() {
+    border-radius: 5px;
+    // overflow: hidden;
+    border: 1px solid $global-border;
+}
+
+@mixin hook-card-default() {
+    box-shadow: none;
+}
+
+@mixin hook-card-body() {
+    @include tu-screen-max-size-handler('-sm') {
+        padding: 15px;
+    }
+}
+
+
+/* ========================================================================
+   Component: Button
+ ========================================================================== */
+
+@mixin hook-button() {
+    border-radius: 5px;
+    line-height: 42px;
+}
+
+@mixin hook-button-primary() {
+    // border-radius: 42px;
+}
+
+
+/*
+ * Success
+ */
+
+$button-success-background: $global-success-background !default;
+$button-success-color: #fff !default;
+$button-success-hover-background: darken($button-success-background, 5%) !default;
+$button-success-hover-color: $global-inverse-color !default;
+$button-success-active-background: darken($button-success-background, 10%) !default;
+$button-success-active-color: $global-inverse-color !default;
+.uk-button-success {
+    background-color: $button-success-background;
+    color: $button-success-color !important;
+    @if(mixin-exists(hook-button-success)) {
+        @include hook-button-success();
+    }
+}
+
+
+/* Hover + Focus */
+
+.uk-button-success:hover,
+.uk-button-success:focus {
+    background-color: $button-success-hover-background;
+    color: $button-success-hover-color !important;
+    @if(mixin-exists(hook-button-success-hover)) {
+        @include hook-button-success-hover();
+    }
+}
+
+
+/* OnClick + Active */
+
+.uk-button-success:active,
+.uk-button-success.uk-active {
+    background-color: $button-success-active-background;
+    color: $button-success-active-color !important;
+    @if(mixin-exists(hook-button-success-active)) {
+        @include hook-button-success-active();
+    }
+}
+
+
+/* OnClick + Active */
+
+.uk-button-success:disabled {
+    border: 1px solid $button-success-active-background;
+    background-color: transparent;
+    color: $button-success-active-background !important;
+    @if(mixin-exists(hook-button-success-active)) {
+        @include hook-button-success-active();
+    }
+}
+
+
+/* ========================================================================
+   Component: Form
+ ========================================================================== */
+
+@mixin hook-form {
+    border-radius: 4px;
+    background-color: $global-muted-background;
+    transition: all 0.3s;
+    border: 1px solid $global-border;
+}
+
+@mixin hook-form-focus {
+    border: 1px solid $global-primary;
+}
+
+@mixin hook-form-label {
+    font-weight: 500;
+}
+
+
+/* ========================================================================
+   Component: Nav
+ ========================================================================== */
+
+@mixin hook-nav-default-item() {
+    font-size: 14px;
+    transition: 0.5s all;
+    padding: 10px 0;
+}
+
+@mixin hook-nav-default-item-active() {
+    font-weight: 600;
+}
+
+@mixin hook-nav-sub {
+    padding: 5px 10px 5px 10px;
+    background-color: $global-muted-background;
+    border-radius: 5px;
+    a {
+        font-size: 14;
+        color: rgba($global-color, 0.70) !important;
+    }
+    li.uk-active>a {
+        color: rgba($global-primary, 0.90) !important;
+        font-weight: 500;
+    }
+}
+
+
+/* ========================================================================
+    Component: Label
+ ========================================================================== */
+
+@mixin hook-label {
+    border-radius: 3px;
+    &+& {
+        margin-left: 6px;
+    }
+}
+
+.mat-bottom-sheet-container {
+    padding: 0px !important;
+}
+
+td.mat-cell {
+    padding: 6px 15px;
+}
+
+tr.mat-header-row {
+    height: 34px !important;
+    background-color: #f8f8f8;
+}
+
+.mat-sort-header-container {
+    padding: 6px 2px;
+}
+
+fieldset {
+    border: 0px;
+}
+
+.uk-notification-message {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.05), 0px 8px 10px 1px rgba(0, 0, 0, -0.9), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    border: 1px solid;
+    &.uk-notification-message-success {
+        background: #f2fef8;
+    }
+}
+
+.uk-nav-header {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
